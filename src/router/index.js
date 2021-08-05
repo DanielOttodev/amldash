@@ -5,6 +5,7 @@ import Books from '../layout/Books.vue';
 import Login from '../views/Login.vue';
 import Dashboard from '../layout/Dashboard.vue'
 import Calendar from '../components/Calendar.vue';
+import Client from '../layout/Client.vue'
 
 const router = new VueRouter({
     routes : [
@@ -38,6 +39,10 @@ const router = new VueRouter({
                   meta:{
                     requiresAuth: true
                   }
+            },{
+            component: Client,
+            name: "Client",
+            path: "/client/:id"
             }, 
        ]},
        {
@@ -57,7 +62,7 @@ const router = new VueRouter({
 })
 router.beforeEach((to,from,next) => {
     let token = localStorage.getItem('msal.bf5b6be8-ef0d-42ee-9efc-c655a2f3e05e.idtoken');
-    console.log(token);
+    console.log(to)
     if(to.matched.some(route => route.meta.requiresAuth)){
         if( token !== '' && token !== null){
             next();

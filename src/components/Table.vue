@@ -1,9 +1,11 @@
 <template>
   <v-data-table
+ 
     :headers="headers"
     :items="clients"
     sort-by="calories"
     class="elevation-1"
+    @click:row="handleClick"
   >
     <template v-slot:top>
       <v-toolbar
@@ -38,7 +40,7 @@
 
             <v-card-text>
               <v-container>
-                <v-row>
+                <v-row >
                   <v-col
                     cols="12"
                     sm="6"
@@ -66,7 +68,7 @@
                   >
                     <v-text-field
                       v-model="editedItem.fat"
-                      label="Fat (g)"
+                      label="Last Name"
                     ></v-text-field>
                   </v-col>
                   <v-col
@@ -125,7 +127,7 @@
         </v-dialog>
       </v-toolbar>
     </template>
-    <template v-slot:item.actions="{ item }">
+    <template v-slot:[`item.actions`]="{ item }">
       <v-icon
         small
         class="mr-2"
@@ -164,11 +166,12 @@
           sortable: false,
           value: 'name',
         },
-        { text: 'Occupation', value: 'calories' },
-        { text: 'Fat (g)', value: 'fat' },
-        { text: 'Carbs (g)', value: 'carbs' },
-        { text: 'Protein (g)', value: 'protein' },
+        
+        { text: 'Name', value: 'fat' },
+        { text: 'Risk Rating', value: 'carbs' },
+        { text: 'Total Alerts', value: 'calories' },
         { text: 'Actions', value: 'actions', sortable: false },
+        
       ],
       clients: [],
       editedIndex: -1,
@@ -207,17 +210,17 @@
       initialize () {
         this.clients = [
           {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
+            name: '281381',
+            calories: '5',
+            fat: 'Samuel Jackson',
+            carbs: "High",
             protein: 4.0,
           },
           {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
+            name: '10202',
+            calories: '3',
+            fat: 'John B',
+            carbs: 'Low',
             protein: 4.3,
           },
           {
@@ -279,17 +282,17 @@
         ]
       },
       editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
+        this.editedIndex = this.clients.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
       deleteItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
+        this.editedIndex = this.clients.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialogDelete = true
       },
       deleteItemConfirm () {
-        this.desserts.splice(this.editedIndex, 1)
+        this.clients.splice(this.editedIndex, 1)
         this.closeDelete()
       },
       close () {
@@ -299,6 +302,13 @@
           this.editedIndex = -1
         })
       },
+    handleClick(event) {
+      console.log("clicked")
+     this.$router.push({
+       path: "/client/"+event.name,
+       params: event.name
+       })
+},
       closeDelete () {
         this.dialogDelete = false
         this.$nextTick(() => {
@@ -310,7 +320,7 @@
         if (this.editedIndex > -1) {
           Object.assign(this.desserts[this.editedIndex], this.editedItem)
         } else {
-          this.desserts.push(this.editedItem)
+          this.clients.push(this.editedItem)
         }
         this.close()
       },

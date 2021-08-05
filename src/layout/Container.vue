@@ -48,7 +48,7 @@
           </v-list-item-content>
          
         </v-list-item>
-        <v-btn @click="test()"/>
+       
       </v-list>
     </v-navigation-drawer>
 
@@ -77,7 +77,7 @@ export default {
       cards: ['Today', 'Yesterday'],
       drawer: null,
       links: [
-        ['mdi-inbox-arrow-down', 'List','/dashboard'],
+        ['mdi-inbox-arrow-down', 'Dashboard','/dashboard'],
         ['mdi-send', 'Calendar','/calendar'],
         ['mdi-delete', 'BooksAPI', '/books'],
         ['mdi-alert-octagon', 'Unknown', '/'],
@@ -88,7 +88,7 @@ export default {
         this.$router.push(path)
       },
       test(){
-        console.log(localStorage.getItem('msal.bf5b6be8-ef0d-42ee-9efc-c655a2f3e05e.idtoken'));
+       // console.log(localStorage.getItem('msal.bf5b6be8-ef0d-42ee-9efc-c655a2f3e05e.idtoken'));
       },
       signOff(){
            localStorage.clear();

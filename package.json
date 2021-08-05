@@ -9,14 +9,16 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@vue/cli-service": "~4.5.0",
     "@azure/core-http": "^2.0.0",
     "@azure/msal-browser": "^2.15.0",
+    "@vue/cli-service": "~4.5.0",
     "axios": "^0.21.1",
+    "chart.js": "^2.9.4",
     "core-js": "^3.6.5",
     "tiny-emitter": "^2.1.0",
     "vee-validate": "^3.4.10",
     "vue": "^2.6.11",
+    "vue-chartjs": "^3.5.1",
     "vue-msal": "^3.2.0",
     "vue-router": "^3.5.2",
     "vuetify": "^2.4.0",
