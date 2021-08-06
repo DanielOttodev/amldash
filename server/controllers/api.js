@@ -1,18 +1,19 @@
 const db = require('../dbseed')
+const sql = require('mssql')
+
 exports.hello = (req,res) => {
 
-   db.query(`SELECT * FROM main.users`, function(err, result, fields) {
-        if (err) res.send(err);
-        if (result)//{result = result.map(v => Object.assign({}, v));   } 
-        var i
-        var resultstack = []
-        for(i=0; i < result.length ;i++){
-
-            resultstack.push(result[i].username)
-        }
+     console.log(db)
    
-        res.json({"hello": resultstack});
-})};
+ 
+          var request = new sql.Request();
+          request.query(`SELECT * FROM aml where Client = '1991'`, function(err, result, fields) {
+                  if (err) res.send(err);
+                  if (result)//{result = result.map(v => Object.assign({}, v));   } 
+                 res.send(result.recordsets[0][0])
+          }
+     )
+};
 
 
 

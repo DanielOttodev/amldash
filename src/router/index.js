@@ -42,7 +42,8 @@ const router = new VueRouter({
             },{
             component: Client,
             name: "Client",
-            path: "/client/:id"
+            path: "/client/:id",
+            props: true
             }, 
        ]},
        {
@@ -62,7 +63,7 @@ const router = new VueRouter({
 })
 router.beforeEach((to,from,next) => {
     let token = localStorage.getItem('msal.bf5b6be8-ef0d-42ee-9efc-c655a2f3e05e.idtoken');
-    console.log(to)
+   
     if(to.matched.some(route => route.meta.requiresAuth)){
         if( token !== '' && token !== null){
             next();

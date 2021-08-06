@@ -303,7 +303,7 @@
         })
       },
     handleClick(event) {
-      console.log("clicked")
+
      this.$router.push({
        path: "/client/"+event.name,
        params: event.name
