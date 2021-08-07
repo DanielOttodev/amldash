@@ -78,3 +78,4 @@ router.beforeEach((to,from,next) => {
 
 //Vue.use(VueRouter)    
 export default router;
+

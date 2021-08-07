@@ -4,6 +4,7 @@
     :items="alerts"
     :single-expand="singleExpand"
     :expanded.sync="expanded"
+    
     item-key="Amount"
     show-expand
     class="elevation-1"
@@ -18,7 +19,12 @@
     </template>
     <template v-slot:expanded-item="{ headers, item }">
       <td :colspan="headers.length">
-       {{ item.Detail }}
+       <p>{{accountName}}</p>
+       <v-list>
+      <li>
+        {{ item.Detail }}
+        </li>
+       </v-list>
       </td>
     </template>
   </v-data-table>
@@ -27,9 +33,8 @@
   export default {
     props:['alertdata'],
     data () {
-     console.log('here')
-      
       return {
+        message: 'hello',
         expanded: [],
         singleExpand: false,
         alertHeaders: [
@@ -44,10 +49,15 @@
           { text: 'Amount', value: 'Amount' },
 
         ],
-        alerts: this.alertdata
-        ,
+        alerts: this.alertdata,
+        transactions : this.alertdata.detail,     
       }
     },
+    computed: {
+        newmessage : function() { 
+        return this.message.reverse();
+        }    
+    }
   }
-
+  
 </script>
