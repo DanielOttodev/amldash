@@ -34,7 +34,7 @@
     props:['alertdata'],
     data () {
       return {
-        message: 'hello',
+        
         expanded: [],
         singleExpand: false,
         alertHeaders: [
@@ -54,10 +54,11 @@
       }
     },
     computed: {
-        newmessage : function() { 
-        return this.message.reverse();
+        accountName : function() { 
+        console.log('computed:'+ this.alertdata[0].Detail.split('#',1)[0])// This.alerts is undefined?
+        return this.alertdata[0].Detail.split('#',1)[0]
         }    
-    }
+    },
   }
   
 </script>

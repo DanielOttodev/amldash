@@ -1,0 +1,8 @@
+       /* let data = this.$route.params.id;
+        this.clientNumber = data;
+        console.log(this.alertData);
+      await fetch('https://pipetoapi.azurewebsites.net/api/dummyjson')
+            .then(response => response.json())
+            .then((mydata) => (this.alertData = mydata))
+            console.log(this.alertData.detail)*/
+    

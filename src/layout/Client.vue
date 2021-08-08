@@ -15,8 +15,8 @@
         </v-row>
         <v-row>
             <v-col>
-                <div v-if="alertData">
-                    <Table2 :alertdata="alertData"> </Table2>
+                <div v-if="dataReturned">
+                    <Table2  :alertdata="alertData"> </Table2>
                 </div>
             </v-col>
             <v-col>
@@ -29,6 +29,7 @@
 <script>
 import Chart1 from '../components/Chart1.vue'
 import Table2 from '../components/Table2.vue'
+import axios from 'axios'
 
 export default {
     name: 'Client',
@@ -37,13 +38,12 @@ export default {
         Chart1
     },
     props: {
-       
-
     },
     data: () => {
         return {
             clientNumber:'',
-            alertData: null,
+            dataReturned: null,
+            alertData:[],
             options: {
                 responsive: true,
                 scales: {
@@ -86,20 +86,35 @@ export default {
             }
         }
     },
-    mounted() {
-        let data = this.$route.params.id;
-        this.clientNumber = data;
+      created() {
+           this.clientNumber = this.$route.params.id;
+           this.getData()
+       },
 
-        fetch('https://pipetoapi.azurewebsites.net/api/dummyjson')
-            .then(response => response.json())
-            .then((mydata) => (this.alertData = mydata))
-    },
     methods: {
         goBack() {
             this.$router.go(-1)
+        },
+       async getData(){      
+            await axios.get('https://pipetoapi.azurewebsites.net/api/dummyjson')
+                .then((response) => {
+                    // handle success
+                    console.log('Response: ' + response.data[0]);
+                    this.alertData[0] = response.data[0]
+                    console.log(this) // This is still the vue component
+                
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
+                .then(() => {
+                    // Callback
+                    console.log('Callback: '+this.alertData[0]);
+                    this.dataReturned = true;
+                });
         }
     }
-
 }
 </script>
 
